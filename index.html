@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Santhosh | UI/UX Architect & Full Stack Visionary</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0c12;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ========== ADVANCED BACKGROUND ANIMATIONS ========== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: #07090f;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: floatOrb 18s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, #4f46e5, #1e1a7a);
+            top: -20%;
+            left: -10%;
+            animation-duration: 22s;
+        }
+
+        .orb-2 {
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, #ec489a, #6b21a5);
+            bottom: -30%;
+            right: -20%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 45vw;
+            height: 45vw;
+            background: radial-gradient(circle, #06b6d4, #3b82f6);
+            top: 40%;
+            left: 30%;
+            animation-duration: 28s;
+            animation-delay: -2s;
+            opacity: 0.4;
+        }
+
+        .orb-4 {
+            width: 35vw;
+            height: 35vw;
+            background: radial-gradient(circle, #f59e0b, #dc2626);
+            bottom: 10%;
+            left: -15%;
+            animation-duration: 20s;
+            animation-delay: -7s;
+        }
+
+        .orb-5 {
+            position: absolute;
+            width: 25vw;
+            height: 25vw;
+            background: radial-gradient(circle, #10b981, #059669);
+            top: 60%;
+            right: 10%;
+            filter: blur(90px);
+            opacity: 0.3;
+            animation: pulseOrb 15s infinite alternate;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5%, 8%) scale(1.15); }
+        }
+
+        @keyframes pulseOrb {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        /* Animated particle stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 4s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1); }
+        }
+
+        /* Noise texture overlay for depth */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* ========== IMPRESSIVE NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 12, 18, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(79, 70, 229, 0.4);
+            padding: 0.7rem 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            transition: all 0.3s;
+            animation: glowPulse 3s infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(244,114,182,0.3)); }
+            50% { filter: drop-shadow(0 0 8px rgba(244,114,182,0.6)); }
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, #f472b6, #a78bfa);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #f472b6;
+            transform: translateY(-2px);
+        }
+
+        .nav-btn {
+            background: linear-gradient(95deg, #4f46e5, #db2777);
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            color: white !important;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(219, 39, 119, 0.5);
+            background: linear-gradient(95deg, #6366f1, #ec489a);
+        }
+
+        .nav-btn::before {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 800px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(10, 12, 18, 0.95);
+                backdrop-filter: blur(20px);
+                width: 70%;
+                height: calc(100vh - 70px);
+                gap: 2rem;
+                padding: 3rem 2rem;
+                transition: left 0.4s ease;
+                border-right: 1px solid rgba(79,70,229,0.4);
+                z-index: 999;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .navbar {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Glass morphism with vibrant highlights */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(79, 70, 229, 0.15);
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(79, 70, 229, 0.25);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 30px 50px -12px rgba(79, 70, 229, 0.5), 0 0 0 1px rgba(236, 72, 153, 0.5);
+            border-color: rgba(236, 72, 153, 0.6);
+            background: rgba(20, 28, 52, 0.8);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* hero section with entrance animation */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            padding: 2rem 2.5rem;
+            animation: heroGlow 3s infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { box-shadow: 0 0 0 0 rgba(79,70,229,0.2); }
+            100% { box-shadow: 0 0 30px 5px rgba(79,70,229,0.3); }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #a5b4fc, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-top: 1rem;
+            border-left: 4px solid #f472b6;
+            padding-left: 1rem;
+            font-weight: 500;
+        }
+
+        .avatar-icon {
+            font-size: 5rem;
+            background: linear-gradient(145deg, #1e1b4b, #0f172a);
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.6), 0 0 0 2px rgba(244, 114, 182, 0.3);
+            transition: all 0.4s;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .avatar-icon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 40px -5px rgba(236, 72, 153, 0.5);
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .badge {
+            background: rgba(79, 70, 229, 0.25);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #c7d2fe;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: #4f46e5;
+            color: white;
+            border-color: #f472b6;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+            display: inline-block;
+            background: linear-gradient(120deg, #e2e8f0, #a78bfa);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            border-bottom: 3px solid #f472b6;
+            padding-bottom: 0.3rem;
+            transition: all 0.3s;
+        }
+
+        .section-title:hover {
+            transform: translateX(8px);
+            border-bottom-color: #a78bfa;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 0.6rem 1.3rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            backdrop-filter: blur(4px);
+        }
+
+        .skill-item:hover {
+            transform: scale(1.08) translateY(-3px);
+            background: linear-gradient(95deg, #4f46e5, #db2777);
+            color: white;
+            border-color: #f472b6;
+            box-shadow: 0 12px 25px -8px #db2777;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            padding: 2rem;
+            transition: all 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius: 1.8rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            color: #f472b6;
+            border: 1px solid rgba(79, 70, 229, 0.4);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover .project-icon {
+            transform: rotate(5deg) scale(1.05);
+            color: #facc15;
+        }
+
+        .project-title {
+            font-weight: 800;
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(79, 70, 229, 0.2);
+            padding: 0.25rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            border: 1px solid #4f46e5;
+            transition: all 0.2s;
+        }
+
+        .tech-tag:hover {
+            background: #4f46e5;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .achievement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 1rem;
+            border-radius: 1.5rem;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s;
+            border-left: 4px solid #f97316;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(8px);
+            background: rgba(79, 70, 229, 0.2);
+            border-left-color: #f472b6;
+        }
+
+        .achievement-item i {
+            font-size: 1.8rem;
+            color: #f97316;
+            width: 40px;
+        }
+
+        .exp-cert {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .cert-badge {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 100px;
+            padding: 0.6rem 1.3rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #f97316;
+            transition: all 0.3s;
+            color: #fcd34d;
+        }
+
+        .cert-badge i {
+            margin-right: 0.5rem;
+            color: #facc15;
+        }
+
+        .cert-badge:hover {
+            background: #f97316;
+            color: #0f172a;
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(79, 70, 229, 0.3);
+            color: #94a3b8;
+            transition: all 0.3s;
+        }
+
+        .btn-glow {
+            background: linear-gradient(95deg, #4f46e5, #db2777);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.5);
+            transition: all 0.4s;
+            display: inline-block;
+        }
+
+        .btn-glow:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 18px 32px -8px #db2777;
+            background: linear-gradient(95deg, #6366f1, #ec489a);
+        }
+
+        .stats-badge {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.25rem 0.9rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin: 0.2rem;
+            transition: all 0.2s;
+        }
+
+        .stats-badge:hover {
+            background: #4f46e5;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* scroll reveal enhancements */
+        [data-aos] {
+            transition-timing-function: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-tagline {
+                border-left: none;
+                text-align: center;
+            }
+            .container {
+                padding: 5rem 1.2rem 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        ::selection {
+            background: #f472b6;
+            color: #0a0c12;
+        }
+
+        .accent-text {
+            color: #facc15;
+        }
+
+        html {
+            scroll-padding-top: 85px;
+        }
+
+        /* parallax scroll effect for cards */
+        .parallax-item {
+            transition: transform 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="animated-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+</div>
+<div class="stars" id="starsContainer"></div>
+<div class="noise-overlay"></div>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="logo">SANTHOSH</div>
+        <div class="menu-toggle" id="mobileMenu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#achievements">Achievements</a>
+            <a href="#contact" class="nav-btn">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <!-- Hero Section -->
+    <div id="home" class="hero glass-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="50">
+        <div class="hero-content">
+            <div class="badge-list">
+                <span class="badge">UI UX ARCHITECT</span>
+                <span class="badge">FULL STACK ENGINEER</span>
+                <span class="badge">AI INNOVATOR</span>
+            </div>
+            <h1>Santhosh Kumar <br><span style="font-size: 1.5rem; display: block; background: none; color:#cbd5e1;">Designing intelligent interfaces, engineering scalable systems</span></h1>
+            <div class="hero-tagline">
+                Where creative UI UX meets high-performance code — crafting digital experiences that inspire.
+            </div>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="#projects" class="btn-glow">Explore Work</a>
+                <a href="#contact" class="btn-glow" style="background: #1e293b; box-shadow: none;">Get in touch</a>
+            </div>
+        </div>
+        <div class="avatar-icon glass-card">
+            <i class="fas fa-laptop-code" style="font-size: 4.2rem; color: #f472b6;"></i>
+        </div>
+    </div>
+
+    <!-- Education + Leadership -->
+    <div class="grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin: 2rem 0;" data-aos="fade-up" data-aos-delay="150">
+        <div class="glass-card" style="padding: 1.8rem;">
+            <i class="fas fa-graduation-cap" style="font-size: 2rem; color: #f97316;"></i>
+            <h3 style="margin: 0.8rem 0 0.5rem; font-weight: 700;">Academic Foundation</h3>
+            <p><strong>PSNA College of Engineering and Technology</strong><br>Bachelor of Technology - Information Technology | 2023 – 2027</p>
+            <div class="stats-badge">Distinction • Top 8%</div>
+            <p style="margin-top: 12px;"><strong>MSP Solai Nadar Memorial HSS</strong> | Higher Secondary Education 2022-2023</p>
+        </div>
+        <div class="glass-card" style="padding: 1.8rem;">
+            <i class="fas fa-users" style="font-size: 2rem; color: #06b6d4;"></i>
+            <h3 style="margin: 0.8rem 0 0.5rem;">Leadership & Methodologies</h3>
+            <div class="skills-grid" style="margin-top: 0;">
+                <span class="skill-item">Team Leadership</span>
+                <span class="skill-item">Agile Scrum</span>
+                <span class="skill-item">UI UX Strategy</span>
+                <span class="skill-item">Figma / AdobeXD</span>
+            </div>
+            <p style="margin-top: 15px;"><span class="accent-text">Executive Secretary</span> — Dramatics Club (orchestrated 5+ major college events)</p>
+        </div>
+    </div>
+
+    <!-- Technical Skills -->
+    <div id="skills" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="section-title">Technical Arsenal</h2>
+        <div class="glass-card" style="padding: 2rem;">
+            <div><strong class="accent-text">Programming Languages:</strong> 
+                <span class="stats-badge">Java</span> <span class="stats-badge">Python</span> <span class="stats-badge">JavaScript</span> <span class="stats-badge">SQL</span>
+            </div>
+            <div style="margin-top: 1rem;"><strong class="accent-text">Frontend & Backend:</strong> 
+                <span class="stats-badge">React.js</span> <span class="stats-badge">Node.js</span> <span class="stats-badge">Express.js</span> <span class="stats-badge">Flask</span> <span class="stats-badge">Spring Boot</span>
+            </div>
+            <div style="margin-top: 1rem;"><strong class="accent-text">Databases & Tools:</strong> 
+                <span class="stats-badge">MySQL</span> <span class="stats-badge">MongoDB</span> <span class="stats-badge">Firebase</span> <span class="stats-badge">Git</span> <span class="stats-badge">Postman</span>
+            </div>
+            <div style="margin-top: 1rem;"><strong class="accent-text">Creative Suite:</strong> 
+                <span class="stats-badge">Figma</span> <span class="stats-badge">Adobe XD</span> <span class="stats-badge">UI Prototyping</span> <span class="stats-badge">Design Systems</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div id="projects" style="margin-top: 3rem;" data-aos="fade-up" data-aos-delay="250">
+        <h2 class="section-title">Signature Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card glass-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="project-icon"><i class="fas fa-face-grin-tongue-squint"></i></div>
+                <div class="project-title">Face Recognition Attendance</div>
+                <div class="project-desc">AI-driven real-time attendance with 98% accuracy, automated identity verification and RESTful API orchestration.</div>
+                <div class="tech-stack"><span class="tech-tag">Flask</span><span class="tech-tag">MySQL</span><span class="tech-tag">OpenCV</span><span class="tech-tag">REST APIs</span></div>
+                <div><span class="accent-text">80% manual effort reduction</span> • 500+ secure records</div>
+            </div>
+            <div class="project-card glass-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="project-icon"><i class="fas fa-diagram-project"></i></div>
+                <div class="project-title">Collaborative TaskFlow</div>
+                <div class="project-desc">Full stack real-time collaboration tool for 10+ concurrent users. Dynamic dashboards and optimized workflow design.</div>
+                <div class="tech-stack"><span class="tech-tag">React.js</span><span class="tech-tag">Node.js</span><span class="tech-tag">Express</span><span class="tech-tag">MongoDB</span></div>
+                <div><span class="accent-text">30% productivity boost</span> • 1000+ active events</div>
+            </div>
+            <div class="project-card glass-card" data-aos="flip-left" data-aos-delay="300">
+                <div class="project-icon"><i class="fas fa-brain"></i></div>
+                <div class="project-title">Medical AI Chatbot (RAG)</div>
+                <div class="project-desc">Retrieval-Augmented Generation system processing 1.3GB medical corpus for high-precision clinical responses.</div>
+                <div class="tech-stack"><span class="tech-tag">Python</span><span class="tech-tag">NLP</span><span class="tech-tag">Vector Search</span><span class="tech-tag">LLM</span></div>
+                <div><span class="accent-text">40% accuracy & latency improvement</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievements + Certifications -->
+    <div id="achievements" style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 2rem;" data-aos="fade-up" data-aos-delay="300">
+        <div class="glass-card" style="padding: 1.8rem;">
+            <h3><i class="fas fa-trophy" style="color: #facc15;"></i> Awards & Hackathon Glory</h3>
+            <div class="achievement-list" style="margin-top: 1.2rem;">
+                <div class="achievement-item"><i class="fas fa-award"></i> Second Prize Winner - Technovist 25, VIT Chennai (50+ teams)</div>
+                <div class="achievement-item"><i class="fas fa-medal"></i> Top 10 Finalist - Hacknovation 2.0, VIT Vellore (AI Innovation)</div>
+                <div class="achievement-item"><i class="fas fa-microphone-alt"></i> Participant - Yukta 2026 Symposium, PSG Itech</div>
+                <div class="achievement-item"><i class="fas fa-calendar-alt"></i> Executive Secretary - Dramatics Club (5+ major fests)</div>
+            </div>
+        </div>
+        <div class="glass-card" style="padding: 1.8rem;">
+            <h3><i class="fas fa-certificate" style="color: #f97316;"></i> Certifications & Industry Exposure</h3>
+            <div class="exp-cert">
+                <div class="cert-badge"><i class="fab fa-redhat"></i> Red Hat Linux (RH104)</div>
+                <div class="cert-badge"><i class="fab fa-google"></i> Google Developers Bootcamp 2025</div>
+                <div class="cert-badge"><i class="fas fa-globe"></i> AI & Networking - Juniper Networks (NIT Trichy)</div>
+                <div class="cert-badge"><i class="fab fa-java"></i> Comprehensive Java Programming (Udemy)</div>
+                <div class="cert-badge"><i class="fas fa-database"></i> MongoDB Fundamentals</div>
+            </div>
+            <p style="margin-top: 1rem;"><span class="accent-text">Trainee:</span> AI & Networking Workshop, NIT Trichy | Google Dev Bootcamp</p>
+        </div>
+    </div>
+
+    <!-- Design Ethos -->
+    <div style="margin-top: 2.5rem;" data-aos="fade-up" data-aos-delay="350">
+        <div class="glass-card" style="padding: 2rem; background: linear-gradient(115deg, rgba(79,70,229,0.15), rgba(219,39,119,0.05)); border-left: 5px solid #f472b6;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+                <div>
+                    <i class="fas fa-paintbrush" style="font-size: 2.2rem; color: #f472b6;"></i>
+                    <h3 style="margin-top: 0.5rem; font-weight: 800;">Design-led engineering philosophy</h3>
+                    <p>Crafting pixel-perfect interfaces with Figma & Adobe XD, bridging immersive UX research and ultra-responsive frontend architecture. Every component is an experience.</p>
+                </div>
+                <div class="skills-grid">
+                    <span class="skill-item">Design Systems</span>
+                    <span class="skill-item">Prototyping</span>
+                    <span class="skill-item">User Research</span>
+                    <span class="skill-item">Accessibility WCAG</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Metrics -->
+    <div style="margin-top: 2.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center;" data-aos="zoom-in" data-aos-delay="400">
+        <div class="glass-card" style="padding: 1.2rem 2rem; text-align: center;">
+            <i class="fas fa-database fa-2x" style="color: #facc15;"></i>
+            <h2 style="font-size: 2.2rem;">1.3GB+</h2>
+            <p>Medical dataset indexed</p>
+        </div>
+        <div class="glass-card" style="padding: 1.2rem 2rem; text-align: center;">
+            <i class="fas fa-chart-line fa-2x" style="color: #f472b6;"></i>
+            <h2 style="font-size: 2.2rem;">98%</h2>
+            <p>Recognition accuracy</p>
+        </div>
+        <div class="glass-card" style="padding: 1.2rem 2rem; text-align: center;">
+            <i class="fas fa-users fa-2x" style="color: #06b6d4;"></i>
+            <h2 style="font-size: 2.2rem;">50+</h2>
+            <p>Teams competed</p>
+        </div>
+    </div>
+
+    <footer id="contact">
+        <p>Santhosh — UI UX Developer & Full Stack Architect</p>
+        <p style="margin-top: 8px;">santhosh.design@portfolio.me  |  github.com/santhosh-creative</p>
+    </footer>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 900,
+        once: false,
+        offset: 80,
+        easing: 'ease-out-quad',
+        mirror: true
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+    mobileBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Generate twinkling stars
+    const starsContainer = document.getElementById('starsContainer');
+    for (let i = 0; i < 150; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.width = Math.random() * 3 + 1 + 'px';
+        star.style.height = star.style.width;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 5 + 's';
+        star.style.animationDuration = Math.random() * 3 + 2 + 's';
+        starsContainer.appendChild(star);
+    }
+
+    // Parallax effect on scroll for glass cards
+    const cards = document.querySelectorAll('.glass-card');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        cards.forEach((card, index) => {
+            const speed = 0.05;
+            const yPos = scrolled * speed * (index % 3) * 0.1;
+            if (window.innerWidth > 800) {
+                card.style.transform = `translateY(${yPos * 0.3}px)`;
+            }
+        });
+    });
+</script>
+</body>
+</html>
